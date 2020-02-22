@@ -46,11 +46,21 @@ loader.load((loader, resources) => {
     cloud.anchor.y = 0.5;
     stage.addChild(cloud);
 
+    let percent = .05;
+
     ticker.add(() => {
-      cloud.x -= 0.3;
-      if (cloud.x <= -80) {
-        cloud.x = renderer.width + 100;
+      cloud.x -= 1;
+
+      if(renderer.width <= 600){
+        percent = .2;
+        cloud.scale.x = 1;
+        cloud.scale.y = 1;
+      } 
+        
+      if (cloud.x <= - (renderer.width * percent)) {
+        cloud.x = renderer.width + (renderer.width * percent);
         cloud.y = Math.random() * renderer.height;
+        console.log("si")
       }
     });
   }
