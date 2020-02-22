@@ -1,5 +1,5 @@
 # Checkpoint
-The border of internet
+The border of the internet
 ### Screenshot
 
 ![](assets/ss.png)
