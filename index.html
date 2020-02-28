@@ -5,8 +5,18 @@
     <title>Checkpoint</title>
   </head>
   <body>
-    <canvas id="canvas"> </canvas>
+    
+    <iframe id="iframe"
+    src="https://open.spotify.com/embed/track/61EtOhbPIryfMDI3iqPWcH"
+    width="400"
+    height="80"
+    frameborder="0"
+    allowtransparency="true"
+    allow="encrypted-media"
+    ></iframe>
 
+    <canvas id="canvas"> </canvas>
+    
     <style>
       body {
         margin: 0;
@@ -14,6 +24,11 @@
       canvas {
         display: block;
         background: blue;
+        z-index: -1;
+      }
+      iframe {
+        display: block;
+        position: absolute;
       }
     </style>
     <script src="./js/pixi.js"></script>
