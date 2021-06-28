@@ -60,7 +60,7 @@ loader.load((loader, resources) => {
       if (cloud.x <= - (renderer.width * percent)) {
         cloud.x = renderer.width + (renderer.width * percent);
         cloud.y = Math.random() * renderer.height;
-        console.log("si")
+     
       }
     });
   }
