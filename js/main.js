@@ -32,35 +32,52 @@ const defaultIcon = "url('assets/ufo.png'),auto";
 renderer.plugins.interaction.cursorStyles.default = defaultIcon;
 
 loader.load((loader, resources) => {
-
   const ticker = new PIXI.Ticker();
+
+  // Adjust these values to change cloud density and scale on smaller screens
+  const smallDeviceWidth = 600; // Consider screens smaller than this width as small devices
+  const smallDeviceScale = 0.8; // Smaller scale for clouds on small devices
+  const spacingMultiplier = 1.5; // Increase to spread clouds out more on small devices
 
   for (let i = 0; i < 100; i++) {
     const texture = PIXI.Texture.from("./assets/Clouds_1.png");
     const cloud = new PIXI.Sprite(texture);
-    cloud.x = Math.random() * renderer.screen.width;
+
+    // Adjust position and scale based on screen width
+    if (renderer.width <= smallDeviceWidth) {
+      cloud.scale.x = smallDeviceScale;
+      cloud.scale.y = smallDeviceScale;
+      cloud.x = Math.random() * renderer.screen.width * spacingMultiplier;
+    } else {
+      cloud.scale.x = 1.8;
+      cloud.scale.y = 1.8;
+      cloud.x = Math.random() * renderer.screen.width;
+    }
+
     cloud.y = Math.random() * renderer.screen.height;
-    cloud.scale.x = 1.8;
-    cloud.scale.y = 1.8;
     cloud.anchor.x = 0.5;
     cloud.anchor.y = 0.5;
     stage.addChild(cloud);
 
-    let percent = .05;
+    let percent = .05; // Initial movement speed
 
     ticker.add(() => {
-      cloud.x -= 1;
+      cloud.x -= 1; // Move clouds to the left
 
-      if(renderer.width <= 600){
-        percent = .2;
-        cloud.scale.x = 1;
-        cloud.scale.y = 1;
-      } 
-        
-      if (cloud.x <= - (renderer.width * percent)) {
+      // Adjust cloud position and scale on resize
+      if (renderer.width <= smallDeviceWidth) {
+        percent = .2; // Increase movement speed
+        cloud.scale.x = smallDeviceScale;
+        cloud.scale.y = smallDeviceScale;
+      } else {
+        cloud.scale.x = 1.8;
+        cloud.scale.y = 1.8;
+      }
+
+      // Reset cloud position when it moves off screen
+      if (cloud.x <= -(renderer.width * percent)) {
         cloud.x = renderer.width + (renderer.width * percent);
         cloud.y = Math.random() * renderer.height;
-     
       }
     });
   }
