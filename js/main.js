@@ -75,9 +75,10 @@ loader.load((loader, resources) => {
       updateDebugMessage(`Screen Width: ${currentWidth}, Cloud Scale: ${scale}`);
 
       if (cloud.x <= -(renderer.width * 0.05)) {
-        cloud.x = renderer.width + (Math.random() * 100);
-        // cloud.x = renderer.width + (renderer.width * 0.05);
-        cloud.y = Math.random() * renderer.height;
+        // Slightly offset the cloud to the right of the screen without adding too much distance
+        cloud.x = renderer.width + (cloud.width * 0.5);
+        // Optionally, adjust the y position for variety
+        cloud.y = Math.random() * renderer.screen.height;
       }
     });
   }
