@@ -54,18 +54,7 @@ loader.load((loader, resources) => {
   for (let i = 0; i < 100; i++) {
     const texture = PIXI.Texture.from("./assets/Clouds_1.png");
     const cloud = new PIXI.Sprite(texture);
-
-    // Adjust position and scale based on screen width
-    if (renderer.width <= smallDeviceWidth) {
-      cloud.scale.x = smallDeviceScale;
-      cloud.scale.y = smallDeviceScale;
-      cloud.x = Math.random() * renderer.screen.width * spacingMultiplier;
-    } else {
-      cloud.scale.x = 1.8;
-      cloud.scale.y = 1.8;
-      cloud.x = Math.random() * renderer.screen.width;
-    }
-
+    // Set initial position and scale
     cloud.y = Math.random() * renderer.screen.height;
     cloud.anchor.x = 0.5;
     cloud.anchor.y = 0.5;
@@ -74,26 +63,20 @@ loader.load((loader, resources) => {
     let percent = .05; // Initial movement speed
 
     ticker.add(() => {
-      cloud.x -= 1; // Move clouds to the left
+      // Dynamically check window width each frame and adjust scale
+      const currentWidth = window.innerWidth; // Use window.innerWidth to get current width
+      let scale = currentWidth <= 600 ? 0.8 : 1.8; // Adjust scale based on current width
+      cloud.scale.set(scale, scale); // Apply scale
 
-      // Adjust cloud position and scale on resize
-      if (renderer.width <= smallDeviceWidth) {
-        percent = .2; // Increase movement speed
-        cloud.scale.x = smallDeviceScale;
-        cloud.scale.y = smallDeviceScale;
-      } else {
-        cloud.scale.x = 1.8;
-        cloud.scale.y = 1.8;
-      }
+      cloud.x -= 1;
 
-      // Reset cloud position when it moves off screen
-      if (cloud.x <= -(renderer.width * percent)) {
-        cloud.x = renderer.width + (renderer.width * percent);
+      // Debug message to monitor currentWidth and scale
+      updateDebugMessage(`Screen Width: ${currentWidth}, Cloud Scale: ${scale}`);
+
+      if (cloud.x <= -(renderer.width * 0.05)) {
+        cloud.x = renderer.width + (renderer.width * 0.05);
         cloud.y = Math.random() * renderer.height;
       }
-
-      updateDebugMessage(`Screen Width: ${_w}, Screen Height: ${_h}, Cloud Scale: ${cloud.scale.x}, Cloud Y Position: ${cloud.y}`);
-
     });
   }
 
