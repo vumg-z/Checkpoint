@@ -6,13 +6,13 @@
     left: 0;
     right: 0;
     bottom: 0;
-    width: 100%;
-    height: 100px; /* or the height you desire */
+    width: 90%;
+    height: 90px; /* or the height you desire */
     margin: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 5px;
+    padding: 10px;
   }
   
   body {
