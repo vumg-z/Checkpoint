@@ -40,7 +40,6 @@ function updateDebugMessage(message) {
 }
 
 loader.load((loader, resources) => {
-
   // Initial debug message
   updateDebugMessage("Initializing...");
 
@@ -48,7 +47,8 @@ loader.load((loader, resources) => {
 
   // Adjust these values to change cloud density and scale on smaller screens
   const smallDeviceWidth = 600; // Consider screens smaller than this width as small devices
-  const smallDeviceScale = 0.4; // Smaller scale for clouds on small devices
+  const smallDeviceScale = 0.4; // Corrected to match the comment
+  const largeDeviceScale = 1.8; // Scale for clouds on larger devices
   const spacingMultiplier = 1.5; // Increase to spread clouds out more on small devices
 
   for (let i = 0; i < 100; i++) {
@@ -60,12 +60,10 @@ loader.load((loader, resources) => {
     cloud.anchor.y = 0.5;
     stage.addChild(cloud);
 
-    let percent = .05; // Initial movement speed
-
     ticker.add(() => {
       // Dynamically check window width each frame and adjust scale
       const currentWidth = window.innerWidth; // Use window.innerWidth to get current width
-      let scale = currentWidth <= 600 ? 0.8 : 1.8; // Adjust scale based on current width
+      let scale = currentWidth <= smallDeviceWidth ? smallDeviceScale : largeDeviceScale; // Adjust scale based on current width
       cloud.scale.set(scale, scale); // Apply scale
 
       cloud.x -= 1;
@@ -86,6 +84,4 @@ loader.load((loader, resources) => {
 
   ticker.add(animate);
   ticker.start();
-
-  console.log("si")
 });
