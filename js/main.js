@@ -74,7 +74,7 @@ loader.load((loader, resources) => {
       // Debug message to monitor currentWidth and scale
       updateDebugMessage(`Screen Width: ${currentWidth}, Cloud Scale: ${scale}`);
 
-      if (cloud.x <= -(renderer.width * 0.05)) {
+      if (cloud.x <= -(renderer.width * 0.1)) {
         // Slightly offset the cloud to the right of the screen without adding too much distance
         cloud.x = renderer.width + (cloud.width * 0.1);
         // Optionally, adjust the y position for variety
