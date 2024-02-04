@@ -76,7 +76,7 @@ loader.load((loader, resources) => {
 
       if (cloud.x <= -(renderer.width * 0.05)) {
         // Slightly offset the cloud to the right of the screen without adding too much distance
-        cloud.x = renderer.width + (cloud.width * 0.5);
+        cloud.x = renderer.width + (cloud.width * 0.1);
         // Optionally, adjust the y position for variety
         cloud.y = Math.random() * renderer.screen.height;
       }
