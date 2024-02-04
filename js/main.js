@@ -88,4 +88,6 @@ loader.load((loader, resources) => {
 
   ticker.add(animate);
   ticker.start();
+
+  console.log("si")
 });
