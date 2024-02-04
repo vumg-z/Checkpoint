@@ -47,7 +47,7 @@ loader.load((loader, resources) => {
 
   // Adjust these values to change cloud density and scale on smaller screens
   const smallDeviceWidth = 600; // Consider screens smaller than this width as small devices
-  const smallDeviceScale = 0.4; // Corrected to match the comment
+  const smallDeviceScale = 1; // Corrected to match the comment
   const largeDeviceScale = 1.8; // Scale for clouds on larger devices
   const spacingMultiplier = 1.5; // Increase to spread clouds out more on small devices
 
