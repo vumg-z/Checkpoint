@@ -52,13 +52,16 @@ loader.load((loader, resources) => {
   const spacingMultiplier = 1.5; // Increase to spread clouds out more on small devices
 
   for (let i = 0; i < 100; i++) {
+
     const texture = PIXI.Texture.from("./assets/Clouds_1.png");
     const cloud = new PIXI.Sprite(texture);
-    // Set initial position and scale
+    // Spread clouds out initially across the X-axis
+    cloud.x = Math.random() * renderer.screen.width; // This ensures clouds start at random X positions
     cloud.y = Math.random() * renderer.screen.height;
     cloud.anchor.x = 0.5;
     cloud.anchor.y = 0.5;
     stage.addChild(cloud);
+
 
     ticker.add(() => {
       // Dynamically check window width each frame and adjust scale
@@ -72,7 +75,8 @@ loader.load((loader, resources) => {
       updateDebugMessage(`Screen Width: ${currentWidth}, Cloud Scale: ${scale}`);
 
       if (cloud.x <= -(renderer.width * 0.05)) {
-        cloud.x = renderer.width + (renderer.width * 0.05);
+        cloud.x = renderer.width + (Math.random() * 100);
+        // cloud.x = renderer.width + (renderer.width * 0.05);
         cloud.y = Math.random() * renderer.height;
       }
     });
