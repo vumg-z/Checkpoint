@@ -31,7 +31,19 @@ const defaultIcon = "url('assets/ufo.png'),auto";
 // Add custom cursor styles
 renderer.plugins.interaction.cursorStyles.default = defaultIcon;
 
+// Function to update debug messages
+function updateDebugMessage(message) {
+  const debugElement = document.getElementById("debugMessage");
+  if (debugElement) {
+    debugElement.innerHTML = message;
+  }
+}
+
 loader.load((loader, resources) => {
+
+  // Initial debug message
+  updateDebugMessage("Initializing...");
+
   const ticker = new PIXI.Ticker();
 
   // Adjust these values to change cloud density and scale on smaller screens
@@ -79,6 +91,9 @@ loader.load((loader, resources) => {
         cloud.x = renderer.width + (renderer.width * percent);
         cloud.y = Math.random() * renderer.height;
       }
+
+      updateDebugMessage(`Screen Width: ${_w}, Screen Height: ${_h}, Cloud Scale: ${cloud.scale.x}, Cloud Y Position: ${cloud.y}`);
+
     });
   }
 
